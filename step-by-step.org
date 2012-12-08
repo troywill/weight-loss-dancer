@@ -1,21 +1,32 @@
+* Single user weight management
 1. [ ] create dancer application ( See [[http://search.cpan.org/dist/Dancer/lib/Dancer/Cookbook.pod]] )
    #+BEGIN_SRC sh :tangle 010-create-application.sh :shebang #!/bin/bash
    dancer --application weight   
    #+END_SRC
-2. [X] style.css, index.tt, main.tt
+2. [ ] style.css, index.tt, main.tt
    #+BEGIN_SRC sh :tangle 020-cp-style-index-main.sh :shebang #!/bin/bash
    cp -v public/css/style.css weight/public/css/style.css
    cp -v views/index.tt weight/views/index.tt
    cp -v views/layouts/main.tt weight/views/layouts/
    #+END_SRC
-
-* Logging in
-1. [X] before hook in [[file:./weight/lib/weight.pm]]
+3. [ ] get_goal subroutine file:./weight/lib/weight.pm
    #+BEGIN_SRC perl
-     hook 'before' => sub {
-         if (! session('user') && request->path_info !~ m{^/login}) {
-             var requested_path => request->path_info;
-             request->path_info('/login');
-         }
+     sub get_goal {
+         my $rate_loss = 0.5; # lbs/week
+         my $initial_time = 1354991017;
+         my $elapsed_time = time - $initial_time;
+         my $initial_weight = 176.131;
+         my $goal = $initial_weight - ( $elapsed_time * $rate_loss / 7 / 86400 );
+         return $goal;
+     }
+   #+END_SRC
+4. [ ] hash file:./weight/lib/weight.pm
+   #+BEGIN_SRC perl
+     get '/' => sub {
+         template 'index' => { goal => get_goal() }
      };
+   #+END_SRC
+5. [ ] Goal Header 
+   #+BEGIN_SRC 
+
    #+END_SRC
