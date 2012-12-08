@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=<% settings.charset %>" />
+  <title>weight</title>
+  <link rel="stylesheet" href="<% request.uri_base %>/css/style.css" />
+</head>
+
+<body>
+  <div id='header'>
+      <h1>header</h1>
+  </div>
+  <div id='sidebar'>
+      <h1>navigation</h1>
+      <!-- see "Lists as Navigation", page 140, HTML Dog -->
+      <!-- see "Doing Away With Unwanted Padding and Margins", page 144, HTML Dog -->
+      <ul>
+        <li>Link</li>
+        <li>Link</li>
+      </ul>
+  </div>
+  <div id='main'>
+  <% content %>
+  </div>
+  <div id="footer">
+    <h1>footer</h1>
+  </div>
+  </body>
+</html>
